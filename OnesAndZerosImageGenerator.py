@@ -1,11 +1,12 @@
-
+import math
 from PIL import Image, ImageDraw, ImageFont
 
 profile_image = Image.open('Headshot.JPG')
 WIDTH, HEIGHT = profile_image.size
+ONE_ZERO_SIZE = 12
 
-font = ImageFont.truetype('C:/Windows/Fonts/BRITANIC.ttf', 10)
-cell_width, cell_height = 10, 10
+font = ImageFont.truetype('C:/Windows/Fonts/BRITANIC.ttf', ONE_ZERO_SIZE)
+cell_width, cell_height = ONE_ZERO_SIZE, ONE_ZERO_SIZE
 
 profile_image = profile_image.resize((int(WIDTH/cell_width), int(HEIGHT/cell_height)), Image.NEAREST)
 new_width, new_height = profile_image.size
@@ -16,13 +17,22 @@ d = ImageDraw.Draw(cyber_profile)
 
 for height in range(new_height):
     for width in range(new_width):
-        r, g, b = profile_image[width, height]
-        k = int((r + g + b) / 3)
-        if k < 128:
-            text = "1"
+
+        if width % 2 == 0: continue
         else:
-            text = "0"
-        d.text((width * cell_width, height * cell_height), text=text, font=font, fill=(0, g, 0))
+
+            r, g, b = profile_image[width, height]
+            k = int((r + g + b) / 3)
+
+            if g % 50 > 25:
+                g = int(math.ceil(g / 50.0)) * 50
+            else:
+                g = int(math.floor(g / 50.0)) * 50
+            if k < 128:
+                text = "1"
+            else:
+                text = "0"
+            d.text((width * cell_width, height * cell_height), text=text, font=font, fill=(0, g, 0))
 
 cyber_profile.show()
 cyber_profile.save('Cyber_Profile.jpg')
