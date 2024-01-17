@@ -5,7 +5,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 profile_image = Image.open('Headshot.jpg')
 IMAGE_WIDTH, IMAGE_HEIGHT = profile_image.size
-ONE_ZERO_SIZE = 8
+ONE_ZERO_SIZE = 6
 
 font = ImageFont.truetype('Britanic.ttf', ONE_ZERO_SIZE)
 cell_width, cell_height = ONE_ZERO_SIZE, ONE_ZERO_SIZE
@@ -29,7 +29,7 @@ for height in range(new_height):
         else:
             greenValue = int(math.floor(greenValue / 50.0)) * 50
         # Using average intensity to determine dark pixels (1's) or light (0's)
-        if cellAverageIntensity < 128:
+        if cellAverageIntensity < 150:
             text = "1"
         else:
             text = "0"
