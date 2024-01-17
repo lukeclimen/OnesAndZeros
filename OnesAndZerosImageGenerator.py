@@ -19,7 +19,6 @@ d = ImageDraw.Draw(cyber_profile)
 
 for height in range(new_height):
     for width in range(new_width):
-        if width % 2 == 0: continue
         r, g, b = profile_image[width, height]
         k = int((r + g + b) / 3)
         if g % 50 > 25:
