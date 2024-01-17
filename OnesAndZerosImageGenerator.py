@@ -3,11 +3,11 @@ import random
 
 from PIL import Image, ImageDraw, ImageFont
 
-profile_image = Image.open('Headshot.JPG')
+profile_image = Image.open('Headshot.jpg')
 WIDTH, HEIGHT = profile_image.size
 ONE_ZERO_SIZE = 8
 
-font = ImageFont.truetype('C:/Windows/Fonts/BRITANIC.ttf', ONE_ZERO_SIZE)
+font = ImageFont.truetype('Britanic.ttf', ONE_ZERO_SIZE)
 cell_width, cell_height = ONE_ZERO_SIZE, ONE_ZERO_SIZE
 
 profile_image = profile_image.resize((int(WIDTH/cell_width), int(HEIGHT/cell_height)), Image.NEAREST)
