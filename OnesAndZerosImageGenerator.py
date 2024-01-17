@@ -17,21 +17,24 @@ profile_image = profile_image.load()
 cyber_profile = Image.new('RGB', (IMAGE_WIDTH, IMAGE_HEIGHT), (0, 0, 0))
 draw = ImageDraw.Draw(cyber_profile)
 
+# Iterating through each pixel of the new image
 for height in range(new_height):
     for width in range(new_width):
+        # Taking each of the rgb values for the pixel in question and getting the average
         redValue, greenValue, blueValue = profile_image[width, height]
         cellAverageIntensity = int((redValue + greenValue + blueValue) / 3)
+        # Make the bright greens a step brighter than the not-so-bright greens
         if greenValue % 50 > 25:
             greenValue = int(math.ceil(greenValue / 50.0)) * 50
         else:
             greenValue = int(math.floor(greenValue / 50.0)) * 50
+        # Using average intensity to determine dark pixels (1's) or light (0's)
         if cellAverageIntensity < 128:
             text = "1"
         else:
             text = "0"
         draw.text((width * cell_width, height * cell_height), text=text, font=font, fill=(0, greenValue, 0))
 
-cyber_profile.show()
 cyber_profile.save('Cyber_Profile.jpg')
 
 
